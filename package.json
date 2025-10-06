@@ -5,8 +5,13 @@
     "description": "cheating daddy",
     "main": "src/index.js",
     "scripts": {
+        "build:renderer": "esbuild src/renderer/index.jsx --bundle --outfile=src/renderer/bundle.js --loader:.js=jsx --loader:.jsx=jsx --platform=browser",
+        "watch:renderer": "esbuild src/renderer/index.jsx --bundle --outfile=src/renderer/bundle.js --loader:.js=jsx --loader:.jsx=jsx --platform=browser --watch",
+        "prestart": "npm run build:renderer",
         "start": "electron-forge start",
+        "prepackage": "npm run build:renderer",
         "package": "electron-forge package",
+        "premake": "npm run build:renderer",
         "make": "electron-forge make",
         "publish": "electron-forge publish",
         "lint": "echo \"No linting configured\"",
@@ -26,7 +31,9 @@
     "license": "GPL-3.0",
     "dependencies": {
         "@google/genai": "^1.2.0",
-        "electron-squirrel-startup": "^1.0.1"
+        "electron-squirrel-startup": "^1.0.1",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
     },
     "devDependencies": {
         "@electron-forge/cli": "^7.8.1",
@@ -39,8 +46,11 @@
         "@electron-forge/plugin-fuses": "^7.8.1",
         "@electron/fuses": "^1.8.0",
         "@reforged/maker-appimage": "^5.0.0",
-        "vitest": "^1.6.1",
+        "electron": "^30.0.5",
+        "esbuild": "^0.25.10",
+        "esbuild-plugin-inline-import": "^1.1.0",
         "jsdom": "^23.2.0",
-        "electron": "^30.0.5"
+        "lodash-es": "^4.17.21",
+        "vitest": "^1.6.1"
     }
 }
